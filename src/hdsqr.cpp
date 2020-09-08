@@ -10,7 +10,7 @@ int sgn(const double x) {
 
 // [[Rcpp::export]]
 double mad(const arma::vec& x) {
-  return arma::median(arma::abs(x - arma::median(x))) / 0.6744898;
+  return 1.482602 * arma::median(arma::abs(x - arma::median(x)));
 }
 
 // [[Rcpp::export]]
