@@ -374,7 +374,7 @@ arma::vec sqrLasso(const arma::mat& Z, const arma::vec& Y, const double lambda, 
 arma::vec sqrScad(const arma::mat& Z, const arma::vec& Y, const double lambda, const double tau, const int p, const double n1, const double h, 
                   const double h1, const double h2, const double phi0 = 0.01, const double gamma = 1.5, const double epsilon = 0.001, 
                   const int iteMax = 500) {
-  arma::vec beta = scad(Z, Y, lambda, p, n1, phi0, gamma, epsilon, iteMax);
+  arma::vec beta = lasso(Z, Y, lambda, p, n1, phi0, gamma, epsilon, iteMax);
   arma::vec betaNew = beta;
   // Contraction
   arma::vec Lambda = cmptLambdaSCAD(beta, lambda, p);
@@ -419,7 +419,7 @@ arma::vec sqrScad(const arma::mat& Z, const arma::vec& Y, const double lambda, c
 arma::vec sqrMcp(const arma::mat& Z, const arma::vec& Y, const double lambda, const double tau, const int p, const double n1, const double h, 
                  const double h1, const double h2, const double phi0 = 0.01, const double gamma = 1.5, const double epsilon = 0.001, 
                  const int iteMax = 500) {
-  arma::vec beta = mcp(Z, Y, lambda, p, n1, phi0, gamma, epsilon, iteMax);
+  arma::vec beta = lasso(Z, Y, lambda, p, n1, phi0, gamma, epsilon, iteMax);
   arma::vec betaNew = beta;
   // Contraction
   arma::vec Lambda = cmptLambdaMCP(beta, lambda, p);
