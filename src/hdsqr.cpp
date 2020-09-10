@@ -139,6 +139,7 @@ arma::vec cmptLambdaLasso(const arma::vec& beta, const double lambda, const int 
 // [[Rcpp::export]]
 arma::vec cmptLambdaSCAD(const arma::vec& beta, const double lambda, const int p) {
   arma::vec rst(p + 1);
+  rst(0) = 0;
   for (int i = 1; i <= p; i++) {
     double abBeta = std::abs(beta(i));
     if (abBeta <= lambda) {
@@ -155,6 +156,7 @@ arma::vec cmptLambdaSCAD(const arma::vec& beta, const double lambda, const int p
 // [[Rcpp::export]]
 arma::vec cmptLambdaMCP(const arma::vec& beta, const double lambda, const int p) {
   arma::vec rst(p + 1);
+  rst(0) = 0;
   for (int i = 1; i <= p; i++) {
     double abBeta = std::abs(beta(i));
     rst(i) = (abBeta <= 3 * lambda) ? (lambda - 0.33333 * abBeta) : 0;
