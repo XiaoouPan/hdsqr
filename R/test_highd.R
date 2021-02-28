@@ -1,5 +1,5 @@
 rm(list = ls())
-Rcpp::sourceCpp("/Users/xopan/Documents/Software/hdsqr/src/hdsqr.cpp")
+Rcpp::sourceCpp("src/hdsqr.cpp")
 
 library(FHDQR)
 library(MASS)
@@ -34,7 +34,7 @@ beta = c(rep(1.5, s + 1), rep(0, p - s))
 h = (sqrt(s * log(p) / n) + (s * log(p) / n)^0.25) / 2
 report = matrix(0, 5, 4)
 kfolds = 5
-M = 100
+M = 1
 
 ## Compare Lasso, SCAD, MCP
 pb = txtProgressBar(style = 3)
@@ -53,9 +53,9 @@ for (m in 1:M) {
   beta.lasso = as.numeric(coef(fit, s = fit$lambda.min))
   report[1, ] = report[1, ] + exam(beta, beta.lasso)
   
-  fit = cv.qraenet(X, Y, lambda = lambdaSeq, tau = tau, nfolds = kfolds)
-  beta.qrLasso = as.numeric(coef(fit, s = fit$lambda.min))
-  report[2, ] = report[2, ] + exam(beta, beta.qrLasso)
+  #fit = cv.qraenet(X, Y, lambda = lambdaSeq, tau = tau, nfolds = kfolds)
+  #beta.qrLasso = as.numeric(coef(fit, s = fit$lambda.min))
+  #report[2, ] = report[2, ] + exam(beta, beta.qrLasso)
   
   beta.sqLasso = cvSqrLasso(Z, Y, lambdaSeq, folds, tau, kfolds, h, phi0 = 0.01, gamma = 1.5)
   beta.sqLasso = as.numeric(beta.sqLasso)
