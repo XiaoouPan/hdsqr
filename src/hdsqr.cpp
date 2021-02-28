@@ -411,7 +411,7 @@ arma::vec sqrScad(const arma::mat& Z, const arma::vec& Y, const double lambda, c
     }
     beta = betaNew;
   }
-  /*int iteT = 0;
+  int iteT = 0;
   // Tightening
   arma::vec beta0(p + 1);
   while (iteT <= iteMax) {
@@ -433,7 +433,7 @@ arma::vec sqrScad(const arma::mat& Z, const arma::vec& Y, const double lambda, c
     if (arma::norm(betaNew - beta0, "inf") <= epsilon) {
       break;
     }
-  }*/
+  }
   return betaNew;
 }
 
@@ -455,7 +455,7 @@ arma::vec sqrScadIni(const arma::mat& Z, const arma::vec& Y, const double lambda
     }
     beta = betaNew;
   }
-  /*int iteT = 0;
+  int iteT = 0;
   // Tightening
   arma::vec beta0(p + 1);
   while (iteT <= iteMax) {
@@ -477,7 +477,7 @@ arma::vec sqrScadIni(const arma::mat& Z, const arma::vec& Y, const double lambda
     if (arma::norm(betaNew - beta0, "inf") <= epsilon) {
       break;
     }
-  }*/
+  }
   return betaNew;
 }
 
@@ -500,7 +500,7 @@ arma::vec sqrMcp(const arma::mat& Z, const arma::vec& Y, const double lambda, co
     }
     beta = betaNew;
   }
-  /*int iteT = 0;
+  int iteT = 0;
   // Tightening
   arma::vec beta0(p + 1);
   while (iteT <= iteMax) {
@@ -522,7 +522,7 @@ arma::vec sqrMcp(const arma::mat& Z, const arma::vec& Y, const double lambda, co
     if (arma::norm(betaNew - beta0, "inf") <= epsilon) {
       break;
     }
-  }*/
+  }
   return betaNew;
 }
 
@@ -544,7 +544,7 @@ arma::vec sqrMcpIni(const arma::mat& Z, const arma::vec& Y, const double lambda,
     }
     beta = betaNew;
   }
-  /*int iteT = 0;
+  int iteT = 0;
   // Tightening
   arma::vec beta0(p + 1);
   while (iteT <= iteMax) {
@@ -566,7 +566,7 @@ arma::vec sqrMcpIni(const arma::mat& Z, const arma::vec& Y, const double lambda,
     if (arma::norm(betaNew - beta0, "inf") <= epsilon) {
       break;
     }
-  }*/
+  }
   return betaNew;
 }
 
