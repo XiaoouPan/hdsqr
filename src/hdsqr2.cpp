@@ -117,9 +117,9 @@ arma::mat center(arma::mat X, const int p) {
 }
 
 // [[Rcpp::export]]
-arma::mat standardize(arma::mat X, const int p) {
+arma::mat standardize(arma::mat X, const arma::rowvec& mx, const arma::vec& sx, const int p) {
   for (int i = 0; i < p; i++) {
-    X.col(i) = (X.col(i) - arma::mean(X.col(i))) / arma::stddev(X.col(i));
+    X.col(i) = (X.col(i) - mx(i)) / sx(i);
   }
   return X;
 }
