@@ -1,5 +1,5 @@
 rm(list = ls())
-Rcpp::sourceCpp("src/hdsqr.cpp")
+Rcpp::sourceCpp("src/hdsqr2.cpp")
 
 library(FHDQR)
 library(MASS)
@@ -34,7 +34,7 @@ beta = c(rep(1.5, s + 1), rep(0, p - s))
 h = (sqrt(s * log(p) / n) + (s * log(p) / n)^0.25) / 2
 report = matrix(0, 5, 4)
 kfolds = 5
-M = 1
+M = 50
 
 ## Compare Lasso, SCAD, MCP
 pb = txtProgressBar(style = 3)
@@ -56,15 +56,15 @@ for (m in 1:M) {
   beta.qrLasso = as.numeric(coef(fit, s = fit$lambda.min))
   report[2, ] = report[2, ] + exam(beta, beta.qrLasso)
   
-  beta.sqLasso = cvSqrLasso(Z, Y, lambdaSeq, folds, tau, kfolds, h, phi0 = 0.01, gamma = 1.5)
+  beta.sqLasso = cvSqrLasso(X, Y, lambdaSeq, folds, tau, kfolds, h, phi0 = 0.01, gamma = 1.5)
   beta.sqLasso = as.numeric(beta.sqLasso)
   report[3, ] = report[3, ] + exam(beta, beta.sqLasso)
   
-  beta.sqScad = cvSqrScad(Z, Y, lambdaSeq, folds, tau, kfolds, h, phi0 = 0.01, gamma = 1.5)
+  beta.sqScad = cvSqrScad(X, Y, lambdaSeq, folds, tau, kfolds, h, phi0 = 0.01, gamma = 1.5)
   beta.sqScad = as.numeric(beta.sqScad)
   report[4, ] = report[4, ] + exam(beta, beta.sqScad)
   
-  beta.sqMcp = cvSqrMcp(Z, Y, lambdaSeq, folds, tau, kfolds, h, phi0 = 0.01, gamma = 1.5)
+  beta.sqMcp = cvSqrMcp(X, Y, lambdaSeq, folds, tau, kfolds, h, phi0 = 0.01, gamma = 1.5)
   beta.sqMcp = as.numeric(beta.sqMcp)
   report[5, ] = report[5, ] + exam(beta, beta.sqMcp)
 
