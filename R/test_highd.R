@@ -45,7 +45,6 @@ for (m in 1:M) {
   df = 2
   err = rt(n, df) - qt(tau, df)
   Y = Z %*% beta + err 
-
   folds = createFolds(Y, kfolds, FALSE)
   
   fit = cv.glmnet(X, Y, nlambda = 50)
@@ -53,9 +52,9 @@ for (m in 1:M) {
   beta.lasso = as.numeric(coef(fit, s = fit$lambda.min))
   report[1, ] = report[1, ] + exam(beta, beta.lasso)
   
-  #fit = cv.qraenet(X, Y, lambda = lambdaSeq, tau = tau, nfolds = kfolds)
-  #beta.qrLasso = as.numeric(coef(fit, s = fit$lambda.min))
-  #report[2, ] = report[2, ] + exam(beta, beta.qrLasso)
+  fit = cv.qraenet(X, Y, lambda = lambdaSeq, tau = tau, nfolds = kfolds)
+  beta.qrLasso = as.numeric(coef(fit, s = fit$lambda.min))
+  report[2, ] = report[2, ] + exam(beta, beta.qrLasso)
   
   beta.sqLasso = cvSqrLasso(Z, Y, lambdaSeq, folds, tau, kfolds, h, phi0 = 0.01, gamma = 1.5)
   beta.sqLasso = as.numeric(beta.sqLasso)
