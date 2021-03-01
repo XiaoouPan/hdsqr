@@ -286,7 +286,7 @@ arma::vec scad(const arma::mat& Z, const arma::vec& Y, const double lambda, cons
   int iteT = 0;
   // Tightening
   arma::vec beta0(p + 1);
-  while (iteT <= iteMax) {
+  while (iteT <= 50) {
     iteT++;
     beta = betaNew;
     beta0 = betaNew;
@@ -330,7 +330,7 @@ arma::vec mcp(const arma::mat& Z, const arma::vec& Y, const double lambda, const
   int iteT = 0;
   // Tightening
   arma::vec beta0(p + 1);
-  while (iteT <= iteMax) {
+  while (iteT <= 50) {
     iteT++;
     beta = betaNew;
     beta0 = betaNew;
@@ -416,7 +416,7 @@ arma::vec sqrScad(const arma::mat& Z, const arma::vec& Y, const double lambda, c
   int iteT = 0;
   // Tightening
   arma::vec beta0(p + 1);
-  while (iteT <= iteMax) {
+  while (iteT <= 50) {
     iteT++;
     beta = betaNew;
     beta0 = betaNew;
@@ -460,7 +460,7 @@ arma::vec sqrScadIni(const arma::mat& Z, const arma::vec& Y, const double lambda
   int iteT = 0;
   // Tightening
   arma::vec beta0(p + 1);
-  while (iteT <= iteMax) {
+  while (iteT <= 50) {
     iteT++;
     beta = betaNew;
     beta0 = betaNew;
@@ -505,7 +505,7 @@ arma::vec sqrMcp(const arma::mat& Z, const arma::vec& Y, const double lambda, co
   int iteT = 0;
   // Tightening
   arma::vec beta0(p + 1);
-  while (iteT <= iteMax) {
+  while (iteT <= 50) {
     iteT++;
     beta = betaNew;
     beta0 = betaNew;
@@ -549,7 +549,7 @@ arma::vec sqrMcpIni(const arma::mat& Z, const arma::vec& Y, const double lambda,
   int iteT = 0;
   // Tightening
   arma::vec beta0(p + 1);
-  while (iteT <= iteMax) {
+  while (iteT <= 50) {
     iteT++;
     beta = betaNew;
     beta0 = betaNew;
