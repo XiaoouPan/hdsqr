@@ -109,14 +109,6 @@ double sqLossTrian(const arma::vec& u, const int n, const double tau, const doub
 }*/
 
 // [[Rcpp::export]]
-arma::mat center(arma::mat X, const int p) {
-  for (int i = 0; i < p; i++) {
-    X.col(i) -= arma::mean(X.col(i));
-  }
-  return X;
-}
-
-// [[Rcpp::export]]
 arma::mat standardize(arma::mat X, const arma::rowvec& mx, const arma::vec& sx1, const int p) {
   for (int i = 0; i < p; i++) {
     X.col(i) = (X.col(i) - mx(i)) * sx1(i);
