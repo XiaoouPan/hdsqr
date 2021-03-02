@@ -583,15 +583,15 @@ arma::vec cvSqrLasso(const arma::mat& X, arma::vec Y, const arma::vec& lambdaSeq
     arma::mat trainZ = Z.rows(idxComp), testZ = Z.rows(idx);
     arma::vec trainY = Y.rows(idxComp), testY = Y.rows(idx);
     betaHat = sqrLasso(trainZ, trainY, lambdaSeq(0), sx1, tau, p, n1Train, h, h1, h2, phi0, gamma, epsilon, iteMax);
-    mse(0) += arma::accu(arma::square(testY - testZ * betaHat));
+    mse(0) += arma::accu(lossGauss(testZ, testY, betaHat, tau, h, h1, h2));
     for (int i = 1; i < nlambda; i++) {
       betaHat = sqrLassoIni(trainZ, trainY, lambdaSeq(i), sx1, betaHat, tau, p, n1Train, h, h1, h2, phi0, gamma, epsilon, iteMax);
-      mse(i) += arma::accu(arma::square(testY - testZ * betaHat));
+      mse(i) += arma::accu(lossGauss(testZ, testY, betaHat, tau, h, h1, h2));
     }
   }
   arma::uword cvIdx = arma::index_min(mse);
   betaHat = sqrLasso(Z, Y, lambdaSeq(cvIdx), sx1, tau, p, 1.0 / n, h, h1, h2, phi0, gamma, epsilon, iteMax);
-  betaHat.rows(1, p) %=  sx1;
+  betaHat.rows(1, p) %= sx1;
   betaHat(0) += my - arma::as_scalar(mx * betaHat.rows(1, p));
   return betaHat;
 }
@@ -615,15 +615,15 @@ arma::vec cvSqrScad(const arma::mat& X, arma::vec Y, const arma::vec& lambdaSeq,
     arma::mat trainZ = Z.rows(idxComp), testZ = Z.rows(idx);
     arma::vec trainY = Y.rows(idxComp), testY = Y.rows(idx);
     betaHat = sqrScad(trainZ, trainY, lambdaSeq(0), sx1, tau, p, n1Train, h, h1, h2, phi0, gamma, epsilon, iteMax);
-    mse(0) += arma::accu(arma::square(testY - testZ * betaHat));
+    mse(0) += arma::accu(lossGauss(testZ, testY, betaHat, tau, h, h1, h2));
     for (int i = 1; i < nlambda; i++) {
       betaHat = sqrScadIni(trainZ, trainY, lambdaSeq(i), sx1, betaHat, tau, p, n1Train, h, h1, h2, phi0, gamma, epsilon, iteMax);
-      mse(i) += arma::accu(arma::square(testY - testZ * betaHat));
+      mse(i) += arma::accu(lossGauss(testZ, testY, betaHat, tau, h, h1, h2));
     }
   }
   arma::uword cvIdx = arma::index_min(mse);
   betaHat = sqrScad(Z, Y, lambdaSeq(cvIdx), sx1, tau, p, 1.0 / n, h, h1, h2, phi0, gamma, epsilon, iteMax);
-  betaHat.rows(1, p) %=  sx1;
+  betaHat.rows(1, p) %= sx1;
   betaHat(0) += my - arma::as_scalar(mx * betaHat.rows(1, p));
   return betaHat;
 }
@@ -647,15 +647,15 @@ arma::vec cvSqrMcp(const arma::mat& X, arma::vec Y, const arma::vec& lambdaSeq, 
     arma::mat trainZ = Z.rows(idxComp), testZ = Z.rows(idx);
     arma::vec trainY = Y.rows(idxComp), testY = Y.rows(idx);
     betaHat = sqrMcp(trainZ, trainY, lambdaSeq(0), sx1, tau, p, n1Train, h, h1, h2, phi0, gamma, epsilon, iteMax);
-    mse(0) += arma::accu(arma::square(testY - testZ * betaHat));
+    mse(0) += arma::accu(lossGauss(testZ, testY, betaHat, tau, h, h1, h2));
     for (int i = 1; i < nlambda; i++) {
       betaHat = sqrMcpIni(trainZ, trainY, lambdaSeq(i), sx1, betaHat, tau, p, n1Train, h, h1, h2, phi0, gamma, epsilon, iteMax);
-      mse(i) += arma::accu(arma::square(testY - testZ * betaHat));
+      mse(i) += arma::accu(lossGauss(testZ, testY, betaHat, tau, h, h1, h2));
     }
   }
   arma::uword cvIdx = arma::index_min(mse);
   betaHat = sqrMcp(Z, Y, lambdaSeq(cvIdx), sx1, tau, p, 1.0 / n, h, h1, h2, phi0, gamma, epsilon, iteMax);
-  betaHat.rows(1, p) %=  sx1;
+  betaHat.rows(1, p) %= sx1;
   betaHat(0) += my - arma::as_scalar(mx * betaHat.rows(1, p));
   return betaHat;
 }
