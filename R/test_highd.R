@@ -34,7 +34,7 @@ beta = c(rep(1.5, s + 1), rep(0, p - s))
 h = (sqrt(s * log(p) / n) + (s * log(p) / n)^0.25) / 2
 report = matrix(0, 5, 4)
 kfolds = 5
-M = 1
+M = 50
 
 ## Compare Lasso, SCAD, MCP
 pb = txtProgressBar(style = 3)
