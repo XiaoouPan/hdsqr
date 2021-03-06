@@ -36,7 +36,23 @@ report = matrix(0, 5, 4)
 kfolds = 5
 M = 50
 
-## Compare Lasso, SCAD, MCP
+## Run sqr-lasso, scad and mcp with a pre-specified lambda
+X = matrix(rnorm(n * p), n, p)
+Z = cbind(rep(1, n), X)
+df = 2
+err = rt(n, df) - qt(tau, df)
+Y = Z %*% beta + err
+lambda = 0.02
+beta.sqlasso = SqrLasso(X, Y, lambda, tau, h, phi0 = 0.01, gamma = 1.5)
+exam(beta, beta.sqlasso)
+beta.sqScad = SqrScad(X, Y, lambda, tau, h, phi0 = 0.01, gamma = 1.5)
+exam(beta, beta.sqScad)
+beta.sqMcp = SqrMcp(X, Y, lambda, tau, h, phi0 = 0.01, gamma = 1.5)
+exam(beta, beta.sqMcp)
+
+## Compare sqr-Lasso, SCAD, MCP via cross-validation
+## The functions below run cross-validation without warm-start along the sequence of lambda
+## For warm-start, use the function "cvSqrLassoWarm, cvSqrScadWarm, cvSqrMcpWarm" instead, they work fine for tau around 0.5
 pb = txtProgressBar(style = 3)
 for (m in 1:M) {
   set.seed(m)
