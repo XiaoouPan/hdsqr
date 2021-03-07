@@ -27,7 +27,7 @@ geneCov = function(p) {
 }
 
 n = 200
-p = 500
+p = 800
 s = 10
 tau = 0.9
 beta = c(rep(1.5, s + 1), rep(0, p - s))
